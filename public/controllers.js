@@ -56,7 +56,8 @@ app.controller('beerCtrl', function($scope, BeerFactory) {
           }
           return beer;
         })
-        swal("Beer updated!", "Cheers!", "success")
+        swal("Beer updated!", "Cheers!", "success");
+        $scope.editingBeer = false;
       }, function(err) {
         console.log(err);
       })
