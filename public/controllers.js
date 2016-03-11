@@ -6,34 +6,37 @@ app.controller('beerCtrl', function($scope, BeerFactory) {
   console.log('woot.  time for a beer');
 
   BeerFactory.fetch()
-  .then(function(res) {
-    console.log('RES', res);
-    var beers = res.data;
-    $scope.beers = beers;
-  }, function(err) {
-    console.log('ERR', err);
-  });
-
-  $scope.addBeer = function() {
-
-    BeerFactory.create($scope.newBeer)
     .then(function(res) {
-      $scope.beers.push(res.data);
+      console.log('RES', res);
+      var beers = res.data;
+      $scope.beers = beers;
     }, function(err) {
       console.log('ERR', err);
-    })
+    });
+
+  $scope.addBeer = function() {
+    if ($scope.newBeer.brewery && $scope.newBeer.beer && $scope.newBeer.style && $scope.newBeer.url) {
+
+      BeerFactory.create($scope.newBeer)
+        .then(function(res) {
+          $scope.beers.push(res.data);
+          $scope.newBeer = {};
+        }, function(err) {
+          console.log('ERR', err);
+        })
+    }
   };
 
   $scope.removeBeer = function(beer) {
 
     BeerFactory.remove(beer)
-    .then(function() {
-      var index = $scope.beers.indexOf(beer);
-      $scope.beers.splice(index, 1);
-      swal("Beer removed!", "Say no to bad beer!", "success")
-    }, function(err) {
-      console.log('ERR', err);
-    })
+      .then(function() {
+        var index = $scope.beers.indexOf(beer);
+        $scope.beers.splice(index, 1);
+        swal("Beer removed!", "Say no to bad beer!", "success")
+      }, function(err) {
+        console.log('ERR', err);
+      })
   };
 
   $scope.editBeer = function(beer) {
@@ -45,7 +48,7 @@ app.controller('beerCtrl', function($scope, BeerFactory) {
   $scope.saveEdit = function(beerToEdit) {
     console.log('UPDATEDBEER', beerToEdit);
 
-      BeerFactory.edit(beerToEdit)
+    BeerFactory.edit(beerToEdit)
       .then(function() {
         var index = $scope.beers.indexOf(beerToEdit);
         $scope.beers.splice(index, 1, beerToEdit);

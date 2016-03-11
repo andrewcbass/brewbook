@@ -20,20 +20,22 @@
 
 <body ng-app='beerApp' ng-controller="beerCtrl">
   <h1>BrewBook!</h1>
-
+<div class="container" ng-hide="editingBeer">
   <label for=""> Latest Beer:</label>
   <input ng-model="newBeer.brewery" type="text" placeholder="Brewery Name">
   <input ng-model="newBeer.beer" type="text" placeholder="Beer Name">
   <input ng-model="newBeer.style" type="text" placeholder="Style">
   <input ng-model="newBeer.url" type="url" placeholder="url to label">
-  <button ng-click="addBeer()">Add Beer</button>
+  <button ng-click="addBeer()" class="waves-effect waves-light btn">Add Beer</button>
 
-  <div class="container">
+</div>
+
+  <div class="container" ng-hide="editingBeer">
     <div class="row">
       <div ng-repeat="beer in beers" class="col s12 m6">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" ng-src="{{beer.url}}">
+            <img class="activator beerLabel" ng-src="{{beer.url}}">
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">{{beer.brewery}}<i class="material-icons right">more_vert</i></span>
@@ -41,43 +43,42 @@
           </div>
           <div class="card-reveal">
             <span class="card-title grey-text text-darken-4">{{beer.brewery}}<i class="material-icons right">close</i></span>
-            <h4>{{beer.beer}} {{beer.style}}</h4>
-            <p> My rating: {{beer.rating}} / 10 </p>
+            <h4>{{beer.beer}}</h4>
+            <h5>{{beer.style}}</h5>
+            <p> My rating: {{beer.rating}}</p>
             <p>{{beer.desc}}</p>
-            <button ng-click='editBeer(beer)'><i class="material-icons">edit</i></button>
-            <button ng-click='removeBeer(beer)'><i class="material-icons">delete forever</i></button>
+            <button ng-click='editBeer(beer)' class="waves-effect waves-light btn">
+              <i class="material-icons">edit</i>
+            </button>
+            <button ng-click='removeBeer(beer)' class="waves-effect waves-light btn"><i class="material-icons">delete forever</i></button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!--
-      <table>
-        <tr ng-repeat="beer in beers">
-          <td><img ng-src="{{beer.url}}"> </td>
-          <td>
-            <button ng-click='editBeer(beer)'><i class="fa fa-pencil-square-o"></i></button>
-          </td>
-          <td>
-            <button ng-click='removeBeer(beer)'><i class="fa fa-times-circle-o"></i></button>
-          </td>
-        </tr>
-      </table> -->
 
+<!-- Edit popup code -->
   <div ng-show="editingBeer">
-    <h4>Edit Beer</h4>
-    <input ng-model="beerToEdit.brewery" type="text" placeholder="Brewery">
-    <input ng-model="beerToEdit.beer" type="text" placeholder="Beer Name">
-    <input ng-model="beerToEdit.style" type="text" placeholder="Style">
-    <input ng-model="beerToEdit.desc" type="text" placeholder="Notes on Beer">
-    <input ng-model="beerToEdit.url" type="url" placeholder="Type">
-    <button ng-click="saveEdit(beerToEdit)">
-      <i class="material-icons">save</i>
-    </button>
-    <button ng-click="cancelEdit()">
-      <i class="material-icons">cancel</i>
-    </button>
+    <div class="container">
+      <h4>Edit Beer</h4>
+      <input ng-model="beerToEdit.brewery" type="text" placeholder="Brewery">
+      <input ng-model="beerToEdit.beer" type="text" placeholder="Beer Name">
+      <input ng-model="beerToEdit.style" type="text" placeholder="Style">
+      <input ng-model="beerToEdit.desc" type="text" placeholder="Notes on Beer">
+      <input ng-model="beerToEdit.rating" type="number" placeholder="out of 10">
+      <input ng-model="beerToEdit.url" type="url" placeholder="Type">
+      <div class="modal-footer">
+        <button ng-click="saveEdit(beerToEdit)">
+          <i class="material-icons">save</i>
+        </button>
+        <button ng-click="cancelEdit()">
+          <i class="material-icons">cancel</i>
+        </button>
+      </div>
+    </div>
   </div>
+
+
 
 </body>
 
