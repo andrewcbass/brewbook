@@ -46,13 +46,16 @@ app.controller('beerCtrl', function($scope, BeerFactory) {
   }
 
   $scope.saveEdit = function(beerToEdit) {
-    console.log('UPDATEDBEER', beerToEdit);
 
     BeerFactory.edit(beerToEdit)
       .then(function() {
-        var index = $scope.beers.indexOf(beerToEdit);
-        $scope.beers.splice(index, 1, beerToEdit);
-        $scope.editingBeer = false;
+        var id = $scope.beerToEdit.id;
+        $scope.beers = $scope.beers.map(function(beer) {
+          if (id === beer.id) {
+            beer = $scope.beerToEdit;
+          }
+          return beer;
+        })
         swal("Beer updated!", "Cheers!", "success")
       }, function(err) {
         console.log(err);

@@ -20,19 +20,23 @@
 
 <body ng-app='beerApp' ng-controller="beerCtrl">
   <h1>BrewBook!</h1>
-<div class="container" ng-hide="editingBeer">
-  <label for=""> Latest Beer:</label>
-  <input ng-model="newBeer.brewery" type="text" placeholder="Brewery Name">
-  <input ng-model="newBeer.beer" type="text" placeholder="Beer Name">
-  <input ng-model="newBeer.style" type="text" placeholder="Style">
-  <input ng-model="newBeer.url" type="url" placeholder="url to label">
-  <button ng-click="addBeer()" class="waves-effect waves-light btn">Add Beer</button>
+  <div class="container" ng-hide="editingBeer">
+    <label for=""> Latest Beer:</label>
+    <input ng-model="newBeer.brewery" type="text" placeholder="Brewery Name">
+    <input ng-model="newBeer.beer" type="text" placeholder="Beer Name">
+    <input ng-model="newBeer.style" type="text" placeholder="Style">
+    <input ng-model="newBeer.url" type="url" placeholder="url to label">
+    <button ng-click="addBeer()" class="waves-effect waves-light btn">Add</button>
 
-</div>
-
+  </div>
+  <br>
+  <div class="container">
+    <input ng-model="searchText" placeholder="Search your beers">
+  </div>
+  <br>
   <div class="container" ng-hide="editingBeer">
     <div class="row">
-      <div ng-repeat="beer in beers" class="col s12 m6">
+      <div ng-repeat="beer in beers | filter:searchText" class="col s12 m6">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
             <img class="activator beerLabel" ng-src="{{beer.url}}">
@@ -57,7 +61,7 @@
     </div>
   </div>
 
-<!-- Edit popup code -->
+  <!-- Edit popup code -->
   <div ng-show="editingBeer">
     <div class="container">
       <h4>Edit Beer</h4>
@@ -68,10 +72,10 @@
       <input ng-model="beerToEdit.rating" type="number" placeholder="out of 10">
       <input ng-model="beerToEdit.url" type="url" placeholder="Type">
       <div class="modal-footer">
-        <button ng-click="saveEdit(beerToEdit)">
+        <button ng-click="saveEdit(beerToEdit)" class="waves-effect waves-light btn">
           <i class="material-icons">save</i>
         </button>
-        <button ng-click="cancelEdit()">
+        <button ng-click="cancelEdit()" class="waves-effect waves-light btn trash">
           <i class="material-icons">cancel</i>
         </button>
       </div>
