@@ -21,6 +21,7 @@ app.controller('beerCtrl', function($scope, BeerFactory) {
         .then(function(res) {
           $scope.beers.push(res.data);
           $scope.newBeer = {};
+          swal("Beer added!", "Hey, bartender!", "success")
         }, function(err) {
           console.log('ERR', err);
         })
