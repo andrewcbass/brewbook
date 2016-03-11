@@ -12,6 +12,9 @@ app.factory('BeerFactory', function($http) {
     },
     remove: function(beer) {
       return $http.delete( `/beers/${beer.id}`);
+    },
+    edit:  function(beerToEdit) {
+      return $http.put(`/beers/${beerToEdit.id}`, beerToEdit);
     }
   }
 });

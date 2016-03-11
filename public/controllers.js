@@ -30,6 +30,7 @@ app.controller('beerCtrl', function($scope, BeerFactory) {
     .then(function() {
       var index = $scope.beers.indexOf(beer);
       $scope.beers.splice(index, 1);
+      swal("Beer removed!", "Say no to bad beer!", "success")
     }, function(err) {
       console.log('ERR', err);
     })
@@ -41,10 +42,23 @@ app.controller('beerCtrl', function($scope, BeerFactory) {
     $scope.beerToEdit = angular.copy(beer);
   }
 
-  $scope.cancelEdit = function()
+  $scope.saveEdit = function(beerToEdit) {
+    console.log('UPDATEDBEER', beerToEdit);
+
+      BeerFactory.edit(beerToEdit)
+      .then(function() {
+        var index = $scope.beers.indexOf(beerToEdit);
+        $scope.beers.splice(index, 1, beerToEdit);
+        $scope.editingBeer = false;
+        swal("Beer updated!", "Cheers!", "success")
+      }, function(err) {
+        console.log(err);
+      })
+  };
 
   $scope.cancelEdit = function() {
     $scope.editingBeer = false;
   }
+
 
 });

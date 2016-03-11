@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <title>BrewBook</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
   <script src="module.js"></script>
   <script src="controllers.js"></script>
   <script src="services.js"></script>
@@ -34,11 +36,12 @@
 
   <div ng-show="editingBeer">
     <h4>Edit Beer</h4>
-    <input ng-model="beerToEdit.brewery" type="text" placeholder="brand">
-    <input ng-model="beerToEdit.beer" type="number" placeholder="Size">
-    <input ng-model="beerToEdit.style" type="text" placeholder="Type">
+    <input ng-model="beerToEdit.brewery" type="text" placeholder="Brewery">
+    <input ng-model="beerToEdit.beer" type="text" placeholder="Beer Name">
+    <input ng-model="beerToEdit.style" type="text" placeholder="Style">
+    <input ng-model="beerToEdit.desc" type="text" placeholder="Notes on Beer">
     <input ng-model="beerToEdit.url" type="url" placeholder="Type">
-    <button ng-click="saveEdit()">
+    <button ng-click="saveEdit(beerToEdit)">
       <i class="fa fa-check-square-o"></i>
     </button>
     <button ng-click="cancelEdit()">
