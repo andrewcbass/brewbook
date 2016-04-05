@@ -16,7 +16,6 @@ app.controller('beerCtrl', function($scope, BeerFactory) {
 
   $scope.logout = function() {
     BeerFactory.logout();
-    location.reload();
     console.log("Bravo dog! one and done!");
   }
 

@@ -17,10 +17,8 @@ app.factory('BeerFactory', function($http) {
       return $http.put(`/beers/${beerToEdit.id}`, beerToEdit);
     },
     logout: function() {
-      return $http.post("/logout");
-    },
-    login: function() {
-      return $http.get("/login");
+      return $http.post("/logout")
+      .then(location.reload());
     }
   }
 });
