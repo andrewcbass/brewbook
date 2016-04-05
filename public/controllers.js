@@ -14,6 +14,12 @@ app.controller('beerCtrl', function($scope, BeerFactory) {
       console.log('ERR', err);
     });
 
+  $scope.logout = function() {
+    BeerFactory.logout();
+    location.reload();
+    console.log("Bravo dog! one and done!");
+  }
+
   $scope.addBeer = function() {
     if ($scope.newBeer.brewery && $scope.newBeer.beer && $scope.newBeer.style && $scope.newBeer.url) {
 

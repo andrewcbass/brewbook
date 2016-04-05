@@ -11,3 +11,7 @@ button {
   width: 75px;
   display: inline-block;
 }
+
+.buybutton {
+  width: 100px;
+}

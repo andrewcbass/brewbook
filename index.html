@@ -21,6 +21,8 @@
 <body ng-app='beerApp' ng-controller="beerCtrl">
   <h1>BrewBook!</h1>
   <div class="container" ng-hide="editingBeer">
+    <button class="waves-effect waves-light btn byebutton" ng-click="logout()">Bye</button>
+    <hr>
     <label for=""> Latest Beer:</label>
     <input ng-model="newBeer.brewery" type="text" placeholder="Brewery Name">
     <input ng-model="newBeer.beer" type="text" placeholder="Beer Name">

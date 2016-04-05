@@ -15,6 +15,12 @@ app.factory('BeerFactory', function($http) {
     },
     edit:  function(beerToEdit) {
       return $http.put(`/beers/${beerToEdit.id}`, beerToEdit);
+    },
+    logout: function() {
+      return $http.post("/logout");
+    },
+    login: function() {
+      return $http.get("/login");
     }
   }
 });
